@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { legacy_createStore as createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import { basketReducers } from "./store/reducers";
+import BasketList from "./components/BasketList.jsx";
+
+const rootReducer = combineReducers({
+  basket: basketReducers,
+});
+
+const store = createStore(rootReducer);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <BasketList />
+      </Provider>
     </div>
   );
 }
